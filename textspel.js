@@ -5,6 +5,7 @@ function main() {
   var crack;
 
   var inputStr;
+  var inputBool;
 
   var ending = 0;
 
@@ -87,8 +88,18 @@ function main() {
     }
     if (inputStr == 1) {
       //Side-quest
-      
-
+      alert('Du följer efter signalen och hittar fram till en undervattensgrotta.');
+      inputBool = prompt('Det är becksvart i grottan och dina lampor lyckas inte riktigt nå in.\n OK) Åk in i grottan och leta närmare. \n Avbryt) Överge grottan och fortsätt dyka.');
+      if (inputBool) {
+        alert('Du fortsätter in i grottan. Efter att ha letat dig fram genom olika gångar hittar du en annan ubåt.');
+        alert('Den har en stor spricka i skrovet och har blivit begravd av stenar. Det verkar som någon slags olycka hänt här.');
+        alert('På skrovet kan du utläsa namnet "Atlantis". Farkosten verkar inte ha kommit tillräckligt långt.');
+        alert('Du lämnar grottan förundrad över vad som hänt här.');
+        ending += 3;
+      } else if (!inputBool) {
+        alert('Du blir skraj och överger grottan och fortsätter dyka istället.');
+        break;
+      }
       break;
     } else if (inputStr == 2) {
       alert('Du ignorerar signalen och fortsätter att dyka djupare.');
@@ -152,7 +163,19 @@ function main() {
     prompt('Vad är din första önskan?\n(Skriv in ditt svar)');
     alert('Vilken bra önskan! Den blir uppfylld på en gång.');
   } else if (ending == 2) {
-
+    alert('Du ligger nu begravd under en hög med stenar på havsbottnen.');
+    alert('Syret håller långsamt på att ta slut utan räddning i sikte.');
+    alert('Game Over');
+  } else if (ending == 4) {
+    alert('Du klarade dig bättre undan än den förra expeditionen som skickades ner.');
+    alert('Med den magiska röda stenen till ditt förfogande kan du nu uppfylla ditt livs största önskningar.');
+    prompt('Vad är din första önskan?\n(Skriv in ditt svar)');
+    alert('Vilken bra önskan! Den blir uppfylld på en gång.');
+  } else if (ending == 5) {
+    alert('Du är nu, likt den första Atlantis, begravd på havsbotten utan hjälp inom räckhåll.');
+    alert('Det verkar vila någon förbannelse över alla de som försöker få tag i den magiska röda stenen');
+    alert('Syret börjar långsamt ta slut i båten.');
+    alert('Game Over');
   }
 
   while(true) {
@@ -170,44 +193,3 @@ function main() {
   }
 }
 main();
-
-
-// Hull Breach Warning – A small crack appears in the submarine’s hull due to the increasing pressure.
-//
-// A) Try to patch it with emergency sealant.
-//
-// B) Ascend slightly to reduce pressure and reassess.
-//
-// C) Ignore it and continue diving deeper.
-//
-// Strange Sonar Reading – The sonar detects a large moving object nearby, but visibility is poor.
-//
-// A) Turn off all lights and engines to hide.
-//
-// B) Investigate with the submarine’s spotlight.
-//
-// C) Fire a sonar ping to get a clearer picture.
-//
-// Diamond is Stuck – The rare diamond is wedged between rocks on the ocean floor.
-//
-// A) Use the robotic arm to try and pry it loose carefully.
-//
-// B) Deploy a small explosive to break the rock.
-//
-// C) Abandon it and look for another way to profit from the dive.
-//
-// Low Oxygen Levels – The oxygen supply is running low after unexpected delays.
-//
-// A) Turn off non-essential systems to conserve power and air.
-//
-// B) Try to surface immediately, even if it’s risky.
-//
-// C) Search for an emergency oxygen tank hidden in the submarine.
-//
-// Mysterious Distress Signal – The submarine picks up a faint SOS signal from the deep.
-//
-// A) Follow the signal and investigate.
-//
-// B) Ignore it and focus on retrieving the diamond.
-//
-// C) Send a response but remain where you are.
