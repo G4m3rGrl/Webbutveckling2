@@ -14,29 +14,18 @@ function main() {
     if (Math.random() < crack) {
       alert('Sprickan som du inte lagade sprider sig i skrovet tills det spricker. \nGame over!');
       return true;
-    }
+    } else {return false;}
   }
 
   //Användarprompts
   name = prompt("Vad heter du?");
 
-  alert('"Hej " + name + " och välkommen till ubåten Atlantis2."');
+  alert('"Hej ' + name + ' och välkommen till ubåten Atlantis2."');
   alert('"Du har blivit hitkallad på ett väldigt enkelt uppdrag."');
-  alert('"Ta dig ner till havsbottnen, hitta den magiska röda stenen, och återvända upp till ytan med den."');
-
-  //Gör det till en funktion för att kunna använda setTimeout.
-  function mission(){
-    if (confirm('"Är du redo att ta dig an detta uppdrag?"\nOm ja tryck OK, om nej tryck Avbryt"') == false) {
-      alert('"Okej, då frågar jag snart igen."');
-      setTimeout(mission, 5000);
-    }
-  }
-  mission();
-
+  alert('"Ta dig ner till havsbottnen, hitta den magiska röda stenen, och återvänd sedan upp till ytan med den."');
+  alert('"Är du redo att ta dig an detta uppdrag?"');
   alert('"Toppen. Då påbörjar vi vår färd ner i det blå."');
   alert('Båten börjar rusa ner i havet.');
-
-
 
   //Om du väljer att försöka laga sprickan är chansen 70% att du lyckas och 30% att du lyckas halvt.
   //Om du ignorerar sprickan så misslyckas du stort.
@@ -64,7 +53,7 @@ function main() {
   }
 
   alert('Du fortsätter dyka ner i djupet.');
-  if (testCrack) {
+  if (testCrack()) {
     while(true) {
       inputStr = prompt('Tack för att ha spelat Ubåtsäventyret på Atlantis2! \nVill du spela igen? \n 1)Ja\n 2)Nej');
       if (inputStr == 1) {
@@ -81,7 +70,7 @@ function main() {
   }
 
   while(true) {
-    inputStr = prompt('Plötsligt upptäcker du en mystisk SOS-signal nerifrån djupet. \n 1) Undersök signalen genom att följa efter. \n 3) Ignorera signalen och fokusera på uppdraget. \n2) Försök kontakta vad det nu är som har skickat signalen.  ');
+    inputStr = prompt('Plötsligt upptäcker du en mystisk SOS-signal nerifrån djupet. \n 1) Undersök signalen genom att följa efter. \n 2) Ignorera signalen och fokusera på uppdraget. \n3) Försök kontakta vad det nu är som har skickat signalen.  ');
     if (inputStr == 3) {
       alert('Du skickar iväg en signal för att försöka få kontakt. \nEfter några minuter passerat plockar du återigen upp samma SOS-signal.');
       inputStr = prompt('1) Följ efter signalen \n2) Ignorera signalen och fortsätt att dyka.');
@@ -89,11 +78,12 @@ function main() {
     if (inputStr == 1) {
       //Side-quest
       alert('Du följer efter signalen och hittar fram till en undervattensgrotta.');
-      inputBool = prompt('Det är becksvart i grottan och dina lampor lyckas inte riktigt nå in.\n OK) Åk in i grottan och leta närmare. \n Avbryt) Överge grottan och fortsätt dyka.');
+      inputBool = confirm('Det är becksvart i grottan och dina lampor lyckas inte riktigt nå in.\n OK) Åk in i grottan och leta närmare. \n Avbryt) Överge grottan och fortsätt dyka.');
       if (inputBool) {
         alert('Du fortsätter in i grottan. Efter att ha letat dig fram genom olika gångar hittar du en annan ubåt.');
-        alert('Den har en stor spricka i skrovet och har blivit begravd av stenar. Det verkar som någon slags olycka hänt här.');
-        alert('På skrovet kan du utläsa namnet "Atlantis". Farkosten verkar inte ha kommit tillräckligt långt.');
+        alert('Den har en stor spricka i skrovet och har blivit begravd av stenar. Den ser ut att ha legat här länge.');
+        alert('Till följd av vad det nu var som hände har skrovet öppnatts upp och båten blivit fylld med vatten.')
+        alert('På skrovet kan du utläsa namnet "Atlantis". Farkosten verkar inte ha kommit längre än hit.');
         alert('Du lämnar grottan förundrad över vad som hänt här.');
         ending += 3;
       } else if (!inputBool) {
@@ -110,8 +100,8 @@ function main() {
     }
   }
 
-  alert('Du fortsätter dyka djupare och börjar dig närma botten.\n Du märker att tryckmätaren visar att trycket blir allt större.');
-  if (testCrack) {
+  alert('Du fortsätter dyka djupare och börjar dig närma botten.\nDu märker att tryckmätaren visar att trycket blir allt större.');
+  if (testCrack()) {
     while(true) {
       inputStr = prompt('Tack för att ha spelat Ubåtsäventyret på Atlantis2! \nVill du spela igen? \n 1)Ja\n 2)Nej');
       if (inputStr == 1) {
@@ -137,6 +127,7 @@ function main() {
       alert('Du lyckas dra ut den magiska röda stenen ur sprickan utan problem. Det visade sig att den inte satt fast speciellt hårt.');
       alert('Efter att ha fått tag i diamanten så återvänder du tillbaka upp till ytan igen.');
       ending += 1;
+      break;
     } else if (inputStr == 2) {
       //Lavin
       inputStr = prompt('Den starka explosionen sprider sig genom berget och snart börjar tusentals tunga stenar falla mot Ubåten. \n 1) Försök fly undan lavinen. \n 2) Acceptera ditt öde.');
@@ -153,6 +144,7 @@ function main() {
         alert('Du accepterar ditt öde och blir träffad av stenar ovanifrån, och snart har du sjunkit till botten.');
         ending += 2;
       }
+      break;
     } else {
       alert('Ogiltig input:\nSvara bara med den siffra som korresponderar med svarsalternativet.');
     }
