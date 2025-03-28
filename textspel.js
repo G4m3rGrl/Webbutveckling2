@@ -1,12 +1,9 @@
 function main() {
-  //Användarvariabler
+  //Initierar variabler
   var name;
-
   var crack;
-
   var inputStr;
   var inputBool;
-
   var ending = 0;
 
   //Funktioner som körs flera gånger definieras.
@@ -53,6 +50,9 @@ function main() {
   }
 
   alert('Du fortsätter dyka ner i djupet.');
+  //Kör funktionen testCrack. Om den returnar true så ges ett Game-Overmeddelande till användaren.
+  //Sedan frågas om användaren vill spela igen. Allt ligger i en while-loop för att hantera felaktig input.
+  //Anledningen att allt inte ligger in en funktion är för att jag vill kunna använda mig av return för att avsluta scriptet.
   if (testCrack()) {
     while(true) {
       inputStr = prompt('Tack för att ha spelat Ubåtsäventyret på Atlantis2! \nVill du spela igen? \n 1)Ja\n 2)Nej');
@@ -62,27 +62,28 @@ function main() {
       }
       else if (inputStr == 2) {
         return;
-        break;
       } else {
         alert('Ogiltig input:\nSvara bara med den siffra som korresponderar med svarsalternativet.');
       }
     }
   }
 
+  //Ännu en while-loop för att hantera användarinput. Här finns ett val där spelaren får möjligheten att spela ett side-quest.
+  //Här kan spelarens slut påverkas också ifall de gör side-questet. Då läggs 3 till i variablen ending.
   while(true) {
     inputStr = prompt('Plötsligt upptäcker du en mystisk SOS-signal nerifrån djupet. \n 1) Undersök signalen genom att följa efter. \n 2) Ignorera signalen och fokusera på uppdraget. \n3) Försök kontakta vad det nu är som har skickat signalen.  ');
     if (inputStr == 3) {
       alert('Du skickar iväg en signal för att försöka få kontakt. \nEfter några minuter passerat plockar du återigen upp samma SOS-signal.');
       inputStr = prompt('1) Följ efter signalen \n2) Ignorera signalen och fortsätt att dyka.');
     }
+    //Valfritt side-quest
     if (inputStr == 1) {
-      //Side-quest
       alert('Du följer efter signalen och hittar fram till en undervattensgrotta.');
       inputBool = confirm('Det är becksvart i grottan och dina lampor lyckas inte riktigt nå in.\n OK) Åk in i grottan och leta närmare. \n Avbryt) Överge grottan och fortsätt dyka.');
       if (inputBool) {
         alert('Du fortsätter in i grottan. Efter att ha letat dig fram genom olika gångar hittar du en annan ubåt.');
         alert('Den har en stor spricka i skrovet och har blivit begravd av stenar. Den ser ut att ha legat här länge.');
-        alert('Till följd av vad det nu var som hände har skrovet öppnatts upp och båten blivit fylld med vatten.')
+        alert('Till följd av vad det nu var som hände har skrovet öppnatts upp och båten blivit fylld med vatten.');
         alert('På skrovet kan du utläsa namnet "Atlantis". Farkosten verkar inte ha kommit längre än hit.');
         alert('Du lämnar grottan förundrad över vad som hänt här.');
         ending += 3;
@@ -101,6 +102,8 @@ function main() {
   }
 
   alert('Du fortsätter dyka djupare och börjar dig närma botten.\nDu märker att tryckmätaren visar att trycket blir allt större.');
+
+  //Gör samma sak som den tidigare gången sprickan kollades.
   if (testCrack()) {
     while(true) {
       inputStr = prompt('Tack för att ha spelat Ubåtsäventyret på Atlantis2! \nVill du spela igen? \n 1)Ja\n 2)Nej');
@@ -110,7 +113,6 @@ function main() {
       }
       else if (inputStr == 2) {
         return;
-        break;
       } else {
         alert('Ogiltig input:\nSvara bara med den siffra som korresponderar med svarsalternativet.');
       }
@@ -120,17 +122,19 @@ function main() {
   alert('Du kommer nu ner till botten och i mörkret kan du se ett svagt rött sken...');
   alert('När du närmar dig ser du att det är den magiska röda stenens skimmer du ser.');
 
+  //Här är själva finalen av spelet. Användaren får två val, som båda har en chans att påverka slutet.
+  //Slutet påverkas antingen genom att lägga till 1 eller 2 till variablen ending.
   while(true){
     inputStr = prompt('Du ser att stenen sitter fast i en bergsspricka. \n 1) Använd båtens mekaniska robotarm för att försöka dra ut stenen. \n 2) Testa att spränga bort stenen med undervattensdynamit. (+10 poäng för coolhet)');
     if (inputStr == 1) {
-      //Allt går bra.
       alert('Du lyckas dra ut den magiska röda stenen ur sprickan utan problem. Det visade sig att den inte satt fast speciellt hårt.');
       alert('Efter att ha fått tag i diamanten så återvänder du tillbaka upp till ytan igen.');
       ending += 1;
       break;
     } else if (inputStr == 2) {
-      //Lavin
       inputStr = prompt('Den starka explosionen sprider sig genom berget och snart börjar tusentals tunga stenar falla mot Ubåten. \n 1) Försök fly undan lavinen. \n 2) Acceptera ditt öde.');
+      //Om användaren väljer att spränga bort stenen orsakas en lavin av stenar. Det finns en 30% chans att användaren flyr undan den.
+      //Detta påverkar slutet.
       if (inputStr == 1) {
         var x = Math.random();
         if (x < 0.3) {
@@ -150,6 +154,10 @@ function main() {
     }
   }
 
+  //Här presenteras det slut spelaren fått. Det finns fyra olika möjliga.
+  //Om spelaren blir begravd av stenar eller inte och om spelaren gjorde side-questet eller inte är vad som påverkar.
+  //Om spelaren gör side-questet läggs 3 till på ending-variablen. Sen om spelaren blir begravd läggs 2 till på variablen, annars läggs 1 till.
+  //Detta gör att de 4 möjliga värdena på ending är 1, 2, 4 och 5.
   if (ending == 1) {
     alert('Med den magiska röda stenen till ditt förfogande kan du nu uppfylla ditt livs största önskningar.');
     prompt('Vad är din första önskan?\n(Skriv in ditt svar)');
@@ -178,7 +186,6 @@ function main() {
     }
     else if (inputStr == 2) {
       return;
-      break;
     } else {
       alert('Ogiltig input:\nSvara bara med den siffra som korresponderar med svarsalternativet.');
     }
