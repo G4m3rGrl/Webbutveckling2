@@ -1,12 +1,9 @@
 function main() {
-  //Användarvariabler
+  //Variabler definieras
   var name;
-
   var crack;
-
   var inputStr;
   var inputBool;
-
   var ending = 0;
 
   //Funktioner som körs flera gånger definieras.
@@ -62,7 +59,6 @@ function main() {
       }
       else if (inputStr == 2) {
         return;
-        break;
       } else {
         alert('Ogiltig input:\nSvara bara med den siffra som korresponderar med svarsalternativet.');
       }
@@ -82,7 +78,7 @@ function main() {
       if (inputBool) {
         alert('Du fortsätter in i grottan. Efter att ha letat dig fram genom olika gångar hittar du en annan ubåt.');
         alert('Den har en stor spricka i skrovet och har blivit begravd av stenar. Den ser ut att ha legat här länge.');
-        alert('Till följd av vad det nu var som hände har skrovet öppnatts upp och båten blivit fylld med vatten.')
+        alert('Till följd av vad det nu var som hände har skrovet öppnatts upp och båten blivit fylld med vatten.');
         alert('På skrovet kan du utläsa namnet "Atlantis". Farkosten verkar inte ha kommit längre än hit.');
         alert('Du lämnar grottan förundrad över vad som hänt här.');
         ending += 3;
@@ -110,7 +106,6 @@ function main() {
       }
       else if (inputStr == 2) {
         return;
-        break;
       } else {
         alert('Ogiltig input:\nSvara bara med den siffra som korresponderar med svarsalternativet.');
       }
@@ -178,7 +173,6 @@ function main() {
     }
     else if (inputStr == 2) {
       return;
-      break;
     } else {
       alert('Ogiltig input:\nSvara bara med den siffra som korresponderar med svarsalternativet.');
     }
