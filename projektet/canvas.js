@@ -9,11 +9,72 @@ function main() {
   const PLAYER_HEIGHT = 20;
   const MOVEMENT_SPEED = 10;
 
-  //Sätter startkoordinater för spelarelementet.
+  const BLOCK_HEIGHT = 25;
+  const BLOCK_COLOR = "#000";
+  const BLOCK_GAP = 3;
+  const BLOCK1_AMOUNT = 7;
+  const BLOCK2_AMOUNT = 5;
+  const BLOCK3_AMOUNT = 3;
+
+  const BALL_SIZE = 10;
+  const BALL_COLOR = "#000";
+  const BALL_REFRESH_RATE = 15;
+
+  //Sätter startkoordinater för spelaren.
   var playerX = canvas.width * 0.5 - PLAYER_WIDTH / 2;
   var playerY = canvas.height * 0.8;
 
-  //Ritar spelaren enligt angivna vaeiabler & konstanter.
+  //Klass för block.
+  class Block {
+    constructor(x, y, width, height) {
+      this.x = x;
+      this.y = y;
+      this.width = width;
+      this.height = height;
+    }
+  }
+  var blockY = 100;
+  var blockLayer1 = [];
+  var blockLayer2 = [];
+  var blockLayer3 = [];
+
+  //Variabler för Boll.
+  var ballX = playerX + (PLAYER_WIDTH / 2) - (BALL_SIZE/2);
+  var ballY = playerY - canvas.height * 0.1;
+  var ballMoveX = 0;
+  var ballMoveY = 1;
+
+  //Funktion för initiering av variabler, så att de enkelt ska gå att justera.
+  function initBlock (layer, amount) {
+    for (i = 0; i < amount; i++) {
+      layer.push(true);
+    }
+  }
+
+  initBlock(blockLayer1, BLOCK1_AMOUNT);
+  initBlock(blockLayer2, BLOCK2_AMOUNT);
+  initBlock(blockLayer3, BLOCK3_AMOUNT);
+
+  //En funktion som ritar alla block från arrayerna.
+  function drawBlock(layer) {
+    ctx.fillStyle = BLOCK_COLOR;
+    let blockWidth = (canvas.width - BLOCK_GAP) / layer.length - BLOCK_GAP;
+    let blockX = BLOCK_GAP;
+    for (i = 0; i < layer.length; i++) {
+      ctx.fillRect(blockX, blockY, blockWidth, BLOCK_HEIGHT);
+      blockX += blockWidth + BLOCK_GAP;
+      layer[i] = new Block(blockX, blockY, blockWidth, BLOCK_HEIGHT);
+    }
+    blockY += BLOCK_HEIGHT + BLOCK_GAP;
+  }
+  //Kör funktionerna för varje array
+  drawBlock(blockLayer1);
+  drawBlock(blockLayer2);
+  drawBlock(blockLayer3);
+
+
+
+  //Ritar spelaren enligt angivna variabler & konstanter.
   function drawPlayer() {
     ctx.fillStyle = PLAYER_COLOR;
     ctx.fillRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
@@ -33,5 +94,35 @@ function main() {
       drawPlayer();
     }
   }
+
+  function ball() {
+    ctx.clearRect(ballX, ballY, BALL_SIZE, BALL_SIZE);
+
+    ballX += ballMoveX;
+    ballY += ballMoveY;
+
+    //Hit-detection mot spelaren
+    if ((ballX + BALL_SIZE) > playerX && (ballX + BALL_SIZE) < (playerX + PLAYER_WIDTH) && (ballY + BALL_SIZE) > playerY && (ballY + BALL_SIZE) < (playerY + PLAYER_HEIGHT)) {
+      ballMoveY = ballMoveY * (-1);
+    }
+    //Lägg till hit-detection för block
+    if (false){
+
+    }
+    ctx.fillStyle = BALL_COLOR;
+    ctx.fillRect(ballX, ballY, BALL_SIZE, BALL_SIZE);
+
+    setTimeout(function(){
+      ball();
+    }, BALL_REFRESH_RATE);
+  }
+  ball();
 }
 main();
+
+/*
+Att göra:
+- Hit-detection för block
+- Poängsystem?
+- Se till så att boll studsar olika beroende på var spelaren är
+*/
