@@ -18,7 +18,7 @@ function main() {
 
   const BALL_SIZE = 10;
   const BALL_COLOR = "#000";
-  const BALL_REFRESH_RATE = 15;
+  const BALL_REFRESH_RATE = 10;
 
   //Sätter startkoordinater för spelaren.
   var playerX = canvas.width * 0.5 - PLAYER_WIDTH / 2;
@@ -41,7 +41,7 @@ function main() {
   //Variabler för Boll.
   var ballX = playerX + (PLAYER_WIDTH / 2) - (BALL_SIZE/2);
   var ballY = playerY - canvas.height * 0.1;
-  var ballMoveX = 0;
+  var ballMoveX = 1;
   var ballMoveY = 1;
 
   //Funktion för initiering av variabler, så att de enkelt ska gå att justera.
@@ -72,7 +72,9 @@ function main() {
   drawBlock(blockLayer2);
   drawBlock(blockLayer3);
 
-
+  console.log(blockLayer1);
+  console.log(blockLayer2);
+  console.log(blockLayer3);
 
   //Ritar spelaren enligt angivna variabler & konstanter.
   function drawPlayer() {
@@ -95,20 +97,57 @@ function main() {
     }
   }
 
+  function breakBlock(block) {
+    ctx.clearRect(block.x - block.width - BLOCK_GAP - 1, block.y, block.width + 2, block.height);
+    console.log(block.x);
+    console.log(block.y);
+    console.log(block.width);
+    console.log(block.height);
+    block.x = 0;
+    block.y = 0;
+    block.width = 0;
+    block.height = 0;
+  }
+
   function ball() {
     ctx.clearRect(ballX, ballY, BALL_SIZE, BALL_SIZE);
 
     ballX += ballMoveX;
     ballY += ballMoveY;
 
+    function detectBlock (blockLayer) {
+      if (ballY > blockLayer[0].y && ballY < blockLayer[0].y + BLOCK_HEIGHT) {
+        for (i = 0; i < blockLayer.length; i++) {
+          if ((ballX < blockLayer[i].x && ballX > blockLayer[i].x - blockLayer[i].width) || (ballX + BALL_SIZE < blockLayer[i] && ballX + BALL_SIZE > blockLayer[i].x - blockLayer[i].width)){
+            breakBlock(blockLayer[i]);
+            return true;
+          }
+        }
+      }
+    }
+
     //Hit-detection mot spelaren
     if ((ballX + BALL_SIZE) > playerX && (ballX + BALL_SIZE) < (playerX + PLAYER_WIDTH) && (ballY + BALL_SIZE) > playerY && (ballY + BALL_SIZE) < (playerY + PLAYER_HEIGHT)) {
-      ballMoveY = ballMoveY * (-1);
+      ballMoveY *= -1;
     }
-    //Lägg till hit-detection för block
-    if (false){
+    //Hit-detection för kanterna
+    else if (ballX + BALL_SIZE > canvas.width || ballX < 0) {
+      ballMoveX *= -1;
+    }
+    else if (ballY < 0) {
+      ballMoveY *= -1;
+    }
+    //Kör hit-detection för block
+    else if (detectBlock(blockLayer1)) {
+      ballMoveY *= -1;
+    }
+    else if (detectBlock(blockLayer2)) {
+      ballMoveY *= -1;
+    }
+    else if (detectBlock(blockLayer3)) {
+      ballMoveY *= -1;
+    }
 
-    }
     ctx.fillStyle = BALL_COLOR;
     ctx.fillRect(ballX, ballY, BALL_SIZE, BALL_SIZE);
 
@@ -122,7 +161,8 @@ main();
 
 /*
 Att göra:
-- Hit-detection för block
+- Hit-detection för alla håll på blocken
+- Göra bollen rund
 - Poängsystem?
 - Se till så att boll studsar olika beroende på var spelaren är
 */
