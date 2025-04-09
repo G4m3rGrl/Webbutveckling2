@@ -7,7 +7,7 @@ function main() {
   const PLAYER_COLOR = "#000";
   const PLAYER_WIDTH = 100;
   const PLAYER_HEIGHT = 20;
-  const MOVEMENT_SPEED = 10;
+  const MOVEMENT_SPEED = 20;
 
   const BLOCK_HEIGHT = 25;
   const BLOCK_COLOR = "#000";
@@ -18,7 +18,7 @@ function main() {
 
   const BALL_SIZE = 10;
   const BALL_COLOR = "#000";
-  const BALL_REFRESH_RATE = 10;
+  const BALL_REFRESH_RATE = 5;
 
   //Sätter startkoordinater för spelaren.
   var playerX = canvas.width * 0.5 - PLAYER_WIDTH / 2;
@@ -104,9 +104,30 @@ function main() {
     console.log(block.width);
     console.log(block.height);
     block.x = 0;
-    block.y = 0;
     block.width = 0;
     block.height = 0;
+  }
+
+  function detectBlockBottomTop (blockLayer) {
+    if ((ballY > blockLayer[0].y && ballY < blockLayer[0].y + BLOCK_HEIGHT) || (ballY + BALL_SIZE > blockLayer[0].y && ballY + BALL_SIZE < blockLayer[0].y + BLOCK_HEIGHT)) {
+      for (i = 0; i < blockLayer.length; i++) {
+        if ((ballX < blockLayer[i].x && ballX > blockLayer[i].x - blockLayer[i].width) || (ballX + BALL_SIZE < blockLayer[i] && ballX + BALL_SIZE > blockLayer[i].x - blockLayer[i].width)){
+          breakBlock(blockLayer[i]);
+          return true;
+        }
+      }
+    }
+  }
+
+  function detectBlockSide(blockLayer) {
+    if ((ballY > blockLayer[0].y && ballY < blockLayer[0].y + BLOCK_HEIGHT) || (ballY + BALL_SIZE > blockLayer[0].y && ballY + BALL_SIZE < blockLayer[0].y + BLOCK_HEIGHT)) {
+      for (i = 0; i < blockLayer.length; i++) {
+        if ((ballX + BALL_SIZE < blockLayer[i].x + ballMoveX && ballX + BALL_SIZE > blockLayer[i].x - ballMoveX) || (ballX < blockLayer[i].x - blockLayer[i].width + ballMoveX && ballX > blockLayer[i].x - blockLayer[i].width - ballMoveX)) {
+          breakBlock(blockLayer[i]);
+          return true;
+        }
+      }
+    }
   }
 
   function ball() {
@@ -115,19 +136,17 @@ function main() {
     ballX += ballMoveX;
     ballY += ballMoveY;
 
-    function detectBlock (blockLayer) {
-      if (ballY > blockLayer[0].y && ballY < blockLayer[0].y + BLOCK_HEIGHT) {
-        for (i = 0; i < blockLayer.length; i++) {
-          if ((ballX < blockLayer[i].x && ballX > blockLayer[i].x - blockLayer[i].width) || (ballX + BALL_SIZE < blockLayer[i] && ballX + BALL_SIZE > blockLayer[i].x - blockLayer[i].width)){
-            breakBlock(blockLayer[i]);
-            return true;
-          }
-        }
-      }
-    }
+
 
     //Hit-detection mot spelaren
     if ((ballX + BALL_SIZE) > playerX && (ballX + BALL_SIZE) < (playerX + PLAYER_WIDTH) && (ballY + BALL_SIZE) > playerY && (ballY + BALL_SIZE) < (playerY + PLAYER_HEIGHT)) {
+      //Kollar vilken sida av spelaren bollen räffar. Om det är vänstersidan går bollen vänster, annars höger.
+      if (ballX + BALL_SIZE/2 > playerX && ballX + BALL_SIZE/2 < playerX + PLAYER_WIDTH/2) {
+        ballMoveX = Math.abs(ballMoveX) * -1;
+      }
+      else {
+        ballMoveX = Math.abs(ballMoveX);
+      }
       ballMoveY *= -1;
     }
     //Hit-detection för kanterna
@@ -137,15 +156,24 @@ function main() {
     else if (ballY < 0) {
       ballMoveY *= -1;
     }
-    //Kör hit-detection för block
-    else if (detectBlock(blockLayer1)) {
+    //Kör hit-detection för blocks undersida och ovansida
+    else if (detectBlockBottomTop(blockLayer1)) {
       ballMoveY *= -1;
     }
-    else if (detectBlock(blockLayer2)) {
+    else if (detectBlockBottomTop(blockLayer2)) {
       ballMoveY *= -1;
     }
-    else if (detectBlock(blockLayer3)) {
+    else if (detectBlockBottomTop(blockLayer3)) {
       ballMoveY *= -1;
+    }
+    else if (detectBlockSide(blockLayer1)) {
+      ballMoveX *= -1;
+    }
+    else if (detectBlockSide(blockLayer2)) {
+      ballMoveX *= -1;
+    }
+    else if (detectBlockSide(blockLayer3)) {
+      ballMoveX *= -1;
     }
 
     ctx.fillStyle = BALL_COLOR;
@@ -161,8 +189,6 @@ main();
 
 /*
 Att göra:
-- Hit-detection för alla håll på blocken
 - Göra bollen rund
 - Poängsystem?
-- Se till så att boll studsar olika beroende på var spelaren är
 */
