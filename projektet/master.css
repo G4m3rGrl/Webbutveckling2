@@ -1,5 +1,54 @@
+/*Font-licens: https://fonts.google.com/specimen/Open+Sans/license*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@media screen and (max-width: 500px) {
+  body {
+    width: fit-content;
+  }
+  nav {
+    width: fit-content;
+  }
+}
+@media screen and (min-width: 1000px) {
+  nav a {
+    font-size: 40px;
+  }
+}
+a {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
 #breakout {
   border: 5px solid #000;
   margin: auto;
   display: block;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  top: 0;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: #000;
+  position: sticky;
+  background-color: #ED6866;
+  width: 100%;
+}
+nav a {
+  padding-left: 1vw;
+  padding-right: 1vw;
+  white-space: nowrap;
+  color: #000;
+  text-decoration: none;
+  font-size: 4vw;
+  border-left: 3px solid #000;
+}
+#last_nav {
+  border-right: 3px solid #000;
 }
