@@ -1,5 +1,9 @@
 function main() {
+<<<<<<< HEAD
   //Initierar variabler
+=======
+  //Variabler definieras
+>>>>>>> f54688a9ee8d4c46dcc403dc7c4d103a2255a843
   var name;
   var crack;
   var inputStr;
