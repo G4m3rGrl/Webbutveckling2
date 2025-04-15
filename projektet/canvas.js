@@ -54,8 +54,8 @@ function main() {
     let blockX = BLOCK_GAP;
     for (i = 0; i < amount; i++) {
       ctx.fillRect(blockX, blockY, blockWidth, BLOCK_HEIGHT);
-      blockX += blockWidth + BLOCK_GAP;
       layer.push(new Block(blockX, blockY, blockWidth, BLOCK_HEIGHT));
+      blockX += blockWidth + BLOCK_GAP;
     }
     blockY += BLOCK_HEIGHT + BLOCK_GAP;
   }
@@ -92,7 +92,7 @@ function main() {
     //till -100 utom för. De har då ingen storlek och kan därför inte bli träffade.
     //x-egenskapen sätts också till 0, så att detectBlockSide inte ska kunna
     //kollidera med blocket.
-    ctx.clearRect(block.x - block.width - BLOCK_GAP - 1, block.y, block.width + 2, block.height);
+    ctx.clearRect(block.x - 1, block.y, block.width + 2, block.height);
     block.x = -100;
     block.width = 0;
     block.height = 0;
@@ -104,7 +104,7 @@ function main() {
   function detectBlockBottomTop (blockLayer) {
     if ((ballY >= blockLayer[0].y && ballY <= blockLayer[0].y + BLOCK_HEIGHT) || (ballY + BALL_SIZE >= blockLayer[0].y && ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
       for (i = 0; i < blockLayer.length; i++) {
-        if ((ballX <= blockLayer[i].x && ballX >= blockLayer[i].x - blockLayer[i].width) || (ballX + BALL_SIZE <= blockLayer[i] && ballX + BALL_SIZE >= blockLayer[i].x - blockLayer[i].width)){
+        if ((ballX >= blockLayer[i].x && ballX <= blockLayer[i].x + blockLayer[i].width) || (ballX + BALL_SIZE >= blockLayer[i] && ballX + BALL_SIZE <= blockLayer[i].x + blockLayer[i].width)){
           breakBlock(blockLayer[i]);
           return true;
         }
@@ -119,7 +119,7 @@ function main() {
   function detectBlockSide(blockLayer) {
     if ((ballY >= blockLayer[0].y && ballY <= blockLayer[0].y + BLOCK_HEIGHT) || (ballY + BALL_SIZE >= blockLayer[0].y && ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
       for (i = 0; i < blockLayer.length; i++) {
-        if ((ballX + BALL_SIZE <= blockLayer[i].x + ballMoveX && ballX + BALL_SIZE >= blockLayer[i].x - ballMoveX) || (ballX <= blockLayer[i].x - blockLayer[i].width + ballMoveX && ballX >= blockLayer[i].x - blockLayer[i].width - ballMoveX)) {
+        if ((ballX + BALL_SIZE >= blockLayer[i].x + ballMoveX && ballX + BALL_SIZE <= blockLayer[i].x - ballMoveX) || (ballX >= blockLayer[i].x + blockLayer[i].width + ballMoveX && ballX <= blockLayer[i].x + blockLayer[i].width - ballMoveX)) {
           breakBlock(blockLayer[i]);
           return true;
         }

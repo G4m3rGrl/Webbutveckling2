@@ -97,6 +97,32 @@
       skapar av klassen. I konstruktorn så avrundas även alla talen till heltal,
       detta för att undvika buggar, då bollen enbart rör sig 1 heltalskoordinat
       åt gången.</p>
+      <h3>Skapa block</h3>
+      <img src="../images/kod7.png"
+      alt="function drawBlock(layer, amount) {
+             ctx.fillStyle = BLOCK_COLOR;
+             let blockWidth = (canvas.width - BLOCK_GAP) / amount - BLOCK_GAP;
+             let blockX = BLOCK_GAP;
+             for (i = 0; i < amount; i++) {
+               ctx.fillRect(blockX, blockY, blockWidth, BLOCK_HEIGHT);
+               blockX += blockWidth + BLOCK_GAP;
+               layer.push(new Block(blockX, blockY, blockWidth, BLOCK_HEIGHT));
+             }
+             blockY += BLOCK_HEIGHT + BLOCK_GAP;
+           }
+           //Kör funktionerna för varje array
+           drawBlock(blockLayer1, BLOCK1_AMOUNT);
+           drawBlock(blockLayer2, BLOCK2_AMOUNT);
+           drawBlock(blockLayer3, BLOCK3_AMOUNT);">
+      <p>Denna delen skapar blocken. Den använder sig av en funktion som heter
+      drawBlock(). Den tar in 2 parametrar, layer och block, där layer är en
+      array för ett lager och amount är en integer för antalet block som ska
+      skapas på den raden. Först sätts färgen som ska ritas ut till konstanten
+      BLOCK_COLOR. Sedan räknas bredden på hur bred varje block för raden
+      behöver vara genom att dela bredden på fönstret med antalet block, och
+      lämna plats för lite utrymme mellan varje block. blockX variablen sätts
+      så att den börjar skapa block med lite mellanrum mellan kanten. <br><br>
+      Sedan körs en </p>
     </article>
     <footer>
       <p>Byggt av Thea Crona i kursen Webbutveckling 2.</p>
