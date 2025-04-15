@@ -26,7 +26,7 @@
       respektive ctx, vilket är standardnamn för dessa konstanter. De kommer
       sedan användas för att rita ut grafiken i canvas-fönstret.</p>
 
-      <h3>Deklarera konstanter</h3>
+      <h3>Deklarera konstanter och variabler</h3>
       <img src="../images/kod2.png" alt='
         //Spelaren
         const PLAYER_COLOR = "#000";
@@ -56,7 +56,47 @@
       BOLL_SIZE. Att ha värdena i konstanter gör det även lättare för oss att
       läsa koden senare, då ifall vi till exempel skriver 10 inte har någon
       aning om varför, medans om vi läser BALL_SIZE istället så förstår vi
-      direkt vad som menasö.</p>
+      direkt vad som menas.</p>
+      <img src="../images/kod3.png"
+        alt="var playerX = Math.floor(canvas.width * 0.5 - PLAYER_WIDTH/2);
+        var playerY = Math.floor(canvas.height * 0.8);">
+      <p>Sedan har vi en liten enkel uträkning som sätter startkoordinaterna för
+      spelaren. Detta för att spelaren alltid ska ha samma relativa plats,
+      även om vi minskar eller förstorar canvas-fönstret.</p>
+      <img src="../images/kod4.png"
+        alt="//Variabler för Boll.
+             var ballX = playerX + (PLAYER_WIDTH / 2) - (BALL_SIZE/2);
+             var ballY = playerY - canvas.height * 0.1;
+             var ballMoveX = 1;
+             var ballMoveY = 1;">
+      <p>Vi sätter även startkoordinater för bollen, samt ett startvärde för hur
+      bollen ska röra sig i X och Y-rikting.</p>
+      <img src="../images/kod5.png"
+      alt="var blockY = 100;
+           var blockLayer1 = [];
+           var blockLayer2 = [];
+           var blockLayer3 = [];">
+      <p>Sist så initeras en integer samt 3 arrayer för att kunna hantera de
+      block som kommer skapas senare. Värdet på blockY anger i vilken Y-höjd som
+      den första arrayens block ska genereras.</p>
+      <h3>Definiera Block-klassen</h3>
+      <img src="../images/kod6.png"
+      alt="//Klass för block med 4 egenskaper.
+           class Block {
+             constructor(x, y, width, height) {
+               this.x = Math.floor(x);
+               this.y = Math.floor(y);
+               this.width = Math.floor(width);
+               this.height = Math.floor(height);
+             }
+           }">
+      <p>Här definieras projektets enda klass, som heter Block. Det är senare
+      den vi kommer skapa instanser av när vi genererar just block. Varje block
+      har 4 egenskaper som anges i dess konstruktor, egenskaperna x, y, width
+      och height. Dessa kommer sedan få olika värden för de olika instanserna vi
+      skapar av klassen. I konstruktorn så avrundas även alla talen till heltal,
+      detta för att undvika buggar, då bollen enbart rör sig 1 heltalskoordinat
+      åt gången.</p>
     </article>
     <footer>
       <p>Byggt av Thea Crona i kursen Webbutveckling 2.</p>

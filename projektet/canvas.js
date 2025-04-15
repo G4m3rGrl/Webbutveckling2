@@ -2,7 +2,6 @@ function main() {
   //Canvas-Konstanter
   const canvas = document.getElementById("breakout");
   const ctx = canvas.getContext("2d");
-
   //Konstanter för spelelement
   //Spelaren
   const PLAYER_COLOR = "#000";
@@ -25,26 +24,27 @@ function main() {
   var playerX = Math.floor(canvas.width * 0.5 - PLAYER_WIDTH/2);
   var playerY = Math.floor(canvas.height * 0.8);
 
-  //Klass för block med 4 egenskaper.
-  class Block {
-    constructor(x, y, width, height) {
-      this.x = Math.floor(x);
-      this.y = Math.floor(y);
-      this.width = width;
-      this.height = height;
-    }
-  }
+  //Variabler för Boll.
+  var ballX = playerX + (PLAYER_WIDTH / 2) - (BALL_SIZE/2);
+  var ballY = playerY - canvas.height * 0.1;
+  var ballMoveX = 1;
+  var ballMoveY = 1;
+
   //Variabel för block samt 3 arrayer där block läggs efter de skapats.
   var blockY = 100;
   var blockLayer1 = [];
   var blockLayer2 = [];
   var blockLayer3 = [];
 
-  //Variabler för Boll.
-  var ballX = playerX + (PLAYER_WIDTH / 2) - (BALL_SIZE/2);
-  var ballY = playerY - canvas.height * 0.1;
-  var ballMoveX = 1;
-  var ballMoveY = 1;
+  //Klass för block med 4 egenskaper.
+  class Block {
+    constructor(x, y, width, height) {
+      this.x = Math.floor(x);
+      this.y = Math.floor(y);
+      this.width = Math.floor(width);
+      this.height = Math.floor(height);
+    }
+  }
 
   //En funktion som ritar alla block och skapar instanser av block-klassen
   //som sedan läggs till i arrayerna.
