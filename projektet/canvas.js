@@ -85,12 +85,12 @@ function main() {
       drawPlayer();
     }
   }
-
+  
+  //Clearar det ritade blocket, samt sätter blockinstansens storleksegenskaper
+  //till -100 utom för. De har då ingen storlek och kan därför inte bli träffade.
+  //x-egenskapen sätts också till 0, så att detectBlockSide inte ska kunna
+  //kollidera med blocket.
   function breakBlock(block) {
-    //Clearar det ritade blocket, samt sätter blockinstansens storleksegenskaper
-    //till -100 utom för. De har då ingen storlek och kan därför inte bli träffade.
-    //x-egenskapen sätts också till 0, så att detectBlockSide inte ska kunna
-    //kollidera med blocket.
     ctx.clearRect(block.x - 1, block.y, block.width + 2, block.height);
     block.x = -100;
     block.width = 0;

@@ -146,19 +146,23 @@
            alt="window.onkeypress = function (e) {
                 //Om trycker på z
                 if (e.keyCode == 122) {
-                  ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
                   playerX -= MOVEMENT_SPEED;
                   drawPlayer();
                 }
                 //Om trycker på x
                 else if (e.keyCode == 120) {
-                  ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
                   playerX += MOVEMENT_SPEED;
                   drawPlayer();
                 }
               }">
       <p>Här skapas en funktion som körs varje gång användaren trycker ner en
-      tangent. </p>
+      tangent. Först körs en if-sats som kollar ifall tangenten som tryckts
+      ner har keyCode-värdet 122 (alltså om tangenten som tryckts ner är
+      'z'-tangenten). I så fall minskas spelarens x-värde med mängden av
+      konstanten MOVEMENT_SPEED. Sedan körs drawPlayer, vilket gör att spelaren
+      flyttar till vänster. Sedan körs en else if-sats som kollar ifall
+      'x'-tangenten tryckts ner, där koden är likadan, utom att spelaren flyttas
+      till höger istället.</p>
     </article>
     <footer>
       <p>Byggt av Thea Crona i kursen Webbutveckling 2.</p>
