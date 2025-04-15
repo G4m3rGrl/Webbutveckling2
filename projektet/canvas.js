@@ -85,7 +85,7 @@ function main() {
       drawPlayer();
     }
   }
-  
+
   //Clearar det ritade blocket, samt sätter blockinstansens storleksegenskaper
   //till -100 utom för. De har då ingen storlek och kan därför inte bli träffade.
   //x-egenskapen sätts också till 0, så att detectBlockSide inte ska kunna
@@ -101,9 +101,15 @@ function main() {
   //ifall bollens topp rör blockets botten, eller ifall bollens botten rör
   //blockets topp. Detta för att den bara kan kollidera på dessa 2 sätt.
   function detectBlockBottomTop (blockLayer) {
-    if ((ballY >= blockLayer[0].y && ballY <= blockLayer[0].y + BLOCK_HEIGHT) || (ballY + BALL_SIZE >= blockLayer[0].y && ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
+    if ((ballY >= blockLayer[0].y &&
+        ballY <= blockLayer[0].y + BLOCK_HEIGHT) ||
+        (ballY + BALL_SIZE >= blockLayer[0].y &&
+        ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
       for (i = 0; i < blockLayer.length; i++) {
-        if ((ballX >= blockLayer[i].x && ballX <= blockLayer[i].x + blockLayer[i].width) || (ballX + BALL_SIZE >= blockLayer[i] && ballX + BALL_SIZE <= blockLayer[i].x + blockLayer[i].width)){
+        if ((ballX >= blockLayer[i].x &&
+            ballX <= blockLayer[i].x + blockLayer[i].width) ||
+            (ballX + BALL_SIZE >= blockLayer[i] &&
+            ballX + BALL_SIZE <= blockLayer[i].x + blockLayer[i].width)){
           breakBlock(blockLayer[i]);
           return true;
         }

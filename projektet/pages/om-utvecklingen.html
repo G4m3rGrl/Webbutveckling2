@@ -99,21 +99,21 @@
       åt gången.</p>
       <h3>Skapa block</h3>
       <img src="../images/kod7.png"
-      alt="function drawBlock(layer, amount) {
-             ctx.fillStyle = BLOCK_COLOR;
-             let blockWidth = (canvas.width - BLOCK_GAP) / amount - BLOCK_GAP;
-             let blockX = BLOCK_GAP;
-             for (i = 0; i < amount; i++) {
-               ctx.fillRect(blockX, blockY, blockWidth, BLOCK_HEIGHT);
-               blockX += blockWidth + BLOCK_GAP;
-               layer.push(new Block(blockX, blockY, blockWidth, BLOCK_HEIGHT));
-             }
-             blockY += BLOCK_HEIGHT + BLOCK_GAP;
-           }
-           //Kör funktionerna för varje array
-           drawBlock(blockLayer1, BLOCK1_AMOUNT);
-           drawBlock(blockLayer2, BLOCK2_AMOUNT);
-           drawBlock(blockLayer3, BLOCK3_AMOUNT);">
+           alt="function drawBlock(layer, amount) {
+                  ctx.fillStyle = BLOCK_COLOR;
+                  let blockWidth = (canvas.width - BLOCK_GAP) / amount - BLOCK_GAP;
+                  let blockX = BLOCK_GAP;
+                  for (i = 0; i < amount; i++) {
+                    ctx.fillRect(blockX, blockY, blockWidth, BLOCK_HEIGHT);
+                    blockX += blockWidth + BLOCK_GAP;
+                    layer.push(new Block(blockX, blockY, blockWidth, BLOCK_HEIGHT));
+                  }
+                  blockY += BLOCK_HEIGHT + BLOCK_GAP;
+                }
+                //Kör funktionerna för varje array
+                drawBlock(blockLayer1, BLOCK1_AMOUNT);
+                drawBlock(blockLayer2, BLOCK2_AMOUNT);
+                drawBlock(blockLayer3, BLOCK3_AMOUNT);">
       <p>Denna delen skapar blocken. Den använder sig av en funktion som heter
       drawBlock(). Den tar in 2 parametrar, layer och block, där layer är en
       array för ett lager och amount är en integer för antalet block som ska
@@ -163,6 +163,56 @@
       flyttar till vänster. Sedan körs en else if-sats som kollar ifall
       'x'-tangenten tryckts ner, där koden är likadan, utom att spelaren flyttas
       till höger istället.</p>
+      <h3>Ta sönder ett block</h3>
+      <img src="../images/kod10-png"
+           alt="function breakBlock(block) {
+                  ctx.clearRect(block.x - 1, block.y, block.width + 2, block.height);
+                  block.x = -100;
+                  block.width = 0;
+                  block.height = 0;
+                }">
+      <p>Här skapas en funktion som heter breakBlock() som senare kommer att
+      användas för att ta sönder ett block när det är träffat. Det tar in en
+      instance av Block i sin parameter. Först så suddar det ut det ritade
+      blocket, och sedan så sätter den blockets x-koordinat till -100 för att
+      bollen senare inte ska kunna kollidera med den. Den sätter även blockets
+      bredd och höjd till 0. Y-koordinaten lämnas intakt då den används i
+      senare logik för hit-detection.</p>
+      <h3>Hit-detection för block</h3>
+      <p>Här skapas 2 olika funktioner för att kolla ifall bollen träffar ett av
+      blocken. Den första kollar ifall bollen träffar blocket från ovan eller
+      undersigan. Sedan en funktion för att kolla ifall bollen träffar blocket
+      från vänster eller högersidan. De är två olika funktioner i och med att
+      ifall blocket träffas från ovan eller undersidan ska bollens y-riktning
+      ändras, medans ifall det träffas från vänster eller högersidan ska
+      bollens x-riktning ändras.</p>
+      <img src="../images/kod11.png"
+           alt="function detectBlockBottomTop (blockLayer) {
+                if ((ballY >= blockLayer[0].y &&
+                    ballY <= blockLayer[0].y + BLOCK_HEIGHT) ||
+                    (ballY + BALL_SIZE >= blockLayer[0].y &&
+                    ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
+                  for (i = 0; i < blockLayer.length; i++) {
+                    if ((ballX >= blockLayer[i].x &&
+                        ballX <= blockLayer[i].x + blockLayer[i].width) ||
+                        (ballX + BALL_SIZE >= blockLayer[i] &&
+                        ballX + BALL_SIZE <= blockLayer[i].x + blockLayer[i].width)){
+                      breakBlock(blockLayer[i]);
+                      return true;
+                    }
+                  }
+                }
+              }">
+      <p>Denna funktion innehåller egentligen främst 2 if-satser med väldigt
+      långa parametrar, och funktionen i sig tar in en array av block-instanser.
+      Först så kollar funktionen ifall ovansidan av bollens y-koordinat är i
+      mellan blockets ovansidas och undersidas y-koordinat ELLER ifall bollens
+      undersida är mellan blocklagrets y-koordinater. Ifall så är fallet körs en
+      for-loop som itererar alla block i listan, och kollar ifall bollens
+      vänstersida ELLER högersida är mellan blockets x-koordinater. Om så är
+      fallet förstörs blocket genom breakBlock() funktionen och returnar true.
+      Detta för att vi senare kommer använda detta för att kolla ifall bollen
+      ska studsa.</p>
     </article>
     <footer>
       <p>Byggt av Thea Crona i kursen Webbutveckling 2.</p>
