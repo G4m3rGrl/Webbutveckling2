@@ -147,7 +147,7 @@ function main() {
       else {
         ballMoveX = Math.abs(ballMoveX);
       }
-      ballMoveY *= -1;
+      ballMoveY = Math.abs(ballMoveY) * -1;
     }
     //Hit-detection för kanterna av canvas-sidan. Om den rör kanten studsar
     //bollen genom att ballMove variablen inverteras
