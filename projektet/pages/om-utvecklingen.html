@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../master.css">
+    <title>Om spelet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <h1>Om utvecklingen</h1>
+    </header>
+    <nav>
+      <a href="../index.html">Spel</a>
+      <a href="om-spelet.html">Om spelet</a>
+      <a href="om-utvecklingen.html" id="last_nav">Om utvecklingen</a>
+    </nav>
+    <article>
+      <h2>Kodgenomgång</h2>
+      <p>Här kommer jag gå igenom koden från spelet bit för bit. Nedan kommer
+      jag förklara allt bit för bit, med bilder från koden.</p>
+      <h3>Importera canvas</h3>
+      <img src="../images/kod1.png" alt='const canvas = document.getElementById("breakout");
+                                         const ctx = canvas.getContext("2d");'>
+      <p>Först importeras de 2 canvaselementen, och de döps till canvas,
+      respektive ctx, vilket är standardnamn för dessa konstanter. De kommer
+      sedan användas för att rita ut grafiken i canvas-fönstret.</p>
+
+      <h3>Deklarera konstanter</h3>
+      <img src="../images/kod2.png" alt='
+        //Spelaren
+        const PLAYER_COLOR = "#000";
+        const PLAYER_WIDTH = 100;
+        const PLAYER_HEIGHT = 20;
+        const MOVEMENT_SPEED = 20;
+
+        //Blocken
+        const BLOCK_HEIGHT = 25;
+        const BLOCK_COLOR = "#000";
+        const BLOCK_GAP = 3;
+        const BLOCK1_AMOUNT = 7;
+        const BLOCK2_AMOUNT = 5;
+        const BLOCK3_AMOUNT = 3;
+
+        //Bollen
+        const BALL_SIZE = 10;
+        const BALL_COLOR = "#000";
+        const BALL_REFRESH_RATE = 5;'>
+      <p>Efter det så deklarerar vi de konstanter som kommer användas senare
+      i programmet. Konstanter skrivs alla med stora bokstäver, vilket även
+      underlättar läsbarheten för koden. Det som är bra med att ha alla
+      konstantdeklarationer i början av koden är att det gör det enkelt att
+      justera dess värden senare. Om vi till exempel vill att spelaren ska kunna
+      röra sig snabbare behöver vi bara öka värdet för konstanten
+      MOVEMENT_SPEED. Vill vi göra bollen lite större ökar vi bara värdet av
+      BOLL_SIZE. Att ha värdena i konstanter gör det även lättare för oss att
+      läsa koden senare, då ifall vi till exempel skriver 10 inte har någon
+      aning om varför, medans om vi läser BALL_SIZE istället så förstår vi
+      direkt vad som menasö.</p>
+    </article>
+    <footer>
+      <p>Byggt av Thea Crona i kursen Webbutveckling 2.</p>
+    </footer>
+  </body>
+  <script src="canvas.js" charset="utf-8"></script>
+</html>

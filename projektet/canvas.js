@@ -9,7 +9,6 @@ function main() {
   const PLAYER_WIDTH = 100;
   const PLAYER_HEIGHT = 20;
   const MOVEMENT_SPEED = 20;
-
   //Blocken
   const BLOCK_HEIGHT = 25;
   const BLOCK_COLOR = "#000";
@@ -17,7 +16,6 @@ function main() {
   const BLOCK1_AMOUNT = 7;
   const BLOCK2_AMOUNT = 5;
   const BLOCK3_AMOUNT = 3;
-
   //Bollen
   const BALL_SIZE = 10;
   const BALL_COLOR = "#000";
@@ -91,11 +89,11 @@ function main() {
 
   function breakBlock(block) {
     //Clearar det ritade blocket, samt sätter blockinstansens storleksegenskaper
-    //till 0 utom för. De har då ingen storlek och kan därför inte bli träffade.
+    //till -100 utom för. De har då ingen storlek och kan därför inte bli träffade.
     //x-egenskapen sätts också till 0, så att detectBlockSide inte ska kunna
     //kollidera med blocket.
     ctx.clearRect(block.x - block.width - BLOCK_GAP - 1, block.y, block.width + 2, block.height);
-    block.x = 0;
+    block.x = -100;
     block.width = 0;
     block.height = 0;
   }
@@ -153,10 +151,10 @@ function main() {
     }
     //Hit-detection för kanterna av canvas-sidan. Om den rör kanten studsar
     //bollen genom att ballMove variablen inverteras
-    else if (ballX + BALL_SIZE > canvas.width || ballX < 0) {
+    if (ballX + BALL_SIZE >= canvas.width || ballX <= 0) {
       ballMoveX *= -1;
     }
-    else if (ballY < 0) {
+    if (ballY < 0) {
       ballMoveY *= -1;
     }
     //Kör hit-detection för blocks undersida och ovansida. Om den returnar true
@@ -195,6 +193,5 @@ main();
 
 /*
 Att göra:
-- Göra bollen rund
-- Poängsystem?
+- Fixa budd där boll fastnar i spelare (ingen hit-etextion på sidorna är problemet)
 */
