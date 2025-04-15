@@ -122,7 +122,43 @@
       behöver vara genom att dela bredden på fönstret med antalet block, och
       lämna plats för lite utrymme mellan varje block. blockX variablen sätts
       så att den börjar skapa block med lite mellanrum mellan kanten. <br><br>
-      Sedan körs en </p>
+      Sedan körs en for-loop som ritar ut ett block, skapar en ny instance av
+      Block-klassen för det block som ritats ut och sist uppdaterar
+      x-koordinaten för nästa block som ska ritas. I slutet av funktionen
+      uppdateras blockY till det värde där nästa rad av block ska ritas ut.
+      <br><br>
+      Sedan kör vi alla funktioner för varje blocklager, med dess motsvarande
+      array och BLOCK*_AMOUNT konstant i parametern.</p>
+      <h3>Spelaren</h3>
+      <img src="../images/kod8.png"
+           alt="function drawPlayer() {
+                  ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
+                  ctx.fillStyle = PLAYER_COLOR;
+                  ctx.fillRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
+                }
+                drawPlayer();">
+      <p>Denna funktion används för att rita ut spelaren och är väldigt enkel.
+      Först suddas den förre bilden av rpelaren ut. Sedan sätts ritfärgen till
+      spelarens färg, sedan ritas spelaren ut på dess nuvarande koordinater med
+      den storlek som anges i konstanterna. Sedan ritas spelaren ut direkt, så
+      att den är utritad så fort spelet startats.</p>
+      <img src="../images/kod9.png"
+           alt="window.onkeypress = function (e) {
+                //Om trycker på z
+                if (e.keyCode == 122) {
+                  ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
+                  playerX -= MOVEMENT_SPEED;
+                  drawPlayer();
+                }
+                //Om trycker på x
+                else if (e.keyCode == 120) {
+                  ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
+                  playerX += MOVEMENT_SPEED;
+                  drawPlayer();
+                }
+              }">
+      <p>Här skapas en funktion som körs varje gång användaren trycker ner en
+      tangent. </p>
     </article>
     <footer>
       <p>Byggt av Thea Crona i kursen Webbutveckling 2.</p>
