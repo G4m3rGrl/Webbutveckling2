@@ -10,6 +10,11 @@ header {
   display: flex;
   height: 100%;
 }
+article {
+  margin-left: 25%;
+  margin-right: 25%;
+  display: block;
+}
 
 @media screen and (max-width: 500px) {
   body {
@@ -17,6 +22,10 @@ header {
   }
   nav {
     width: fit-content;
+  }
+  article {
+    margin-left: 10%;
+    margin-right: 10%;
   }
 }
 @media screen and (min-width: 1000px) {
@@ -33,10 +42,10 @@ a, h1, h2, h3, p, ul, li {
     "wdth" 100;
 }
 h2 {
-  font-size: 2vw;
+  font-size: 15;
 }
 h3 {
-  font-size: 1.25vw;
+  font-size: 15;
 }
 #breakout {
   border: 5px solid #000;
@@ -67,11 +76,6 @@ nav a {
 #last_nav {
   border-right: 3px solid #000;
 }
-article {
-  margin-left: 25%;
-  margin-right: 25%;
-  display: block;
-}
 footer {
   background-color: #745DF0;
   text-align: center;
@@ -82,4 +86,12 @@ footer {
 }
 #spel li{
   font-size: 1vw;
+}
+#om_spelet img {
+  width: 100%;
+  height: auto;
+}
+#om_utveckling img{
+  max-width: 100%;
+  height: auto;
 }

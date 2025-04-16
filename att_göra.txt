@@ -1,0 +1,3 @@
+- Skriva rapport
+- Testa webbplatsen
+- Kolla webbriktlinjer
