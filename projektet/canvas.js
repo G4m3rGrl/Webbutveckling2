@@ -52,7 +52,7 @@ function main() {
     ctx.fillStyle = BLOCK_COLOR;
     let blockWidth = (canvas.width - BLOCK_GAP) / amount - BLOCK_GAP;
     let blockX = BLOCK_GAP;
-    for (i = 0; i < amount; i++) {
+    for (let i = 0; i < amount; i++) {
       ctx.fillRect(blockX, blockY, blockWidth, BLOCK_HEIGHT);
       layer.push(new Block(blockX, blockY, blockWidth, BLOCK_HEIGHT));
       blockX += blockWidth + BLOCK_GAP;
@@ -85,7 +85,7 @@ function main() {
       playerX += MOVEMENT_SPEED;
       drawPlayer();
     }
-  }
+  };
 
   //Clearar det ritade blocket, samt sätter blockinstansens storleksegenskaper
   //till -100 utom för. De har då ingen storlek och kan därför inte bli träffade
@@ -106,7 +106,7 @@ function main() {
         ballY <= blockLayer[0].y + BLOCK_HEIGHT) ||
         (ballY + BALL_SIZE >= blockLayer[0].y &&
         ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
-      for (i = 0; i < blockLayer.length; i++) {
+      for (let i = 0; i < blockLayer.length; i++) {
         if ((ballX >= blockLayer[i].x &&
             ballX <= blockLayer[i].x + blockLayer[i].width) ||
             (ballX + BALL_SIZE >= blockLayer[i] &&
@@ -127,7 +127,7 @@ function main() {
         ballY <= blockLayer[0].y + BLOCK_HEIGHT) ||
         (ballY + BALL_SIZE >= blockLayer[0].y &&
         ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
-      for (i = 0; i < blockLayer.length; i++) {
+      for (let i = 0; i < blockLayer.length; i++) {
         if ((ballX + BALL_SIZE >= blockLayer[i].x + ballMoveX &&
             ballX + BALL_SIZE <= blockLayer[i].x - ballMoveX) ||
             (ballX >= blockLayer[i].x + blockLayer[i].width + ballMoveX &&
@@ -206,8 +206,3 @@ function main() {
   ball();
 }
 main();
-
-/*
-Att göra:
-- Fixa budd där boll fastnar i spelare (ingen hit-etextion på sidorna är problemet)
-*/
