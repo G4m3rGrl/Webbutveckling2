@@ -72,10 +72,6 @@ article {
   margin-right: 25%;
   display: block;
 }
-article li{
-  font-size: 1vw;
-}
-
 footer {
   background-color: #745DF0;
   text-align: center;
@@ -83,4 +79,7 @@ footer {
   padding-bottom: 0.5%;
   width: 100%;
   bottom: 0%;
+}
+#spel li{
+  font-size: 1vw;
 }

@@ -15,7 +15,7 @@
       <a href="om-spelet.html">Om spelet</a>
       <a href="om-utvecklingen.html" id="last_nav">Om utvecklingen</a>
     </nav>
-    <article>
+    <article id="om_utveckling">
       <h2>Kodgenomgång</h2>
       <p>Här kommer jag gå igenom koden från spelet bit för bit. Nedan kommer
       jag förklara allt bit för bit, med bilder från koden.</p>
@@ -299,6 +299,44 @@
       högersidan ELLER vänstersidan. I så fall inverteras moveX-variabeln.
       Sedan kollas ifall bollens y-koordinat är mindre än 0, alltså för långt
       uppåt. Då inverteras moveY-variabeln.</p>
+      <img src="../images/kod18.png"
+           alt="if (detectBlockSide(blockLayer1)) {
+                  ballMoveX *= -1;
+                }
+                if (detectBlockSide(blockLayer2)) {
+                  ballMoveX *= -1;
+                }
+                if (detectBlockSide(blockLayer3)) {
+                  ballMoveX *= -1;
+                }
+                if (detectBlockBottomTop(blockLayer1)) {
+                  ballMoveY *= -1;
+                }
+                if (detectBlockBottomTop(blockLayer2)) {
+                  ballMoveY *= -1;
+                }
+                if (detectBlockBottomTop(blockLayer3)) {
+                  ballMoveY *= -1;
+                }">
+      <p>Sedan körs de 2 olika hit-detection metoderna för blocken, en gång i
+      varje lager. Ifall funktionen ser att bollen har träffat ett block
+      returnerar den true. I så fall inverteras bollens move-variabel och bollen
+      "studsar".</p>
+      <img src="../images/kod19.png"
+           alt="ctx.fillStyle = BALL_COLOR;
+                ctx.fillRect(ballX, ballY, BALL_SIZE, BALL_SIZE);">
+      <p>I slutet av funktionen ritas den nya bollen ut.</p>
+      <h3>Sammanfattning</h3>
+      <p>Programmet är uppdelat i tre stola delar:</p>
+      <ul>
+        <li>Först skapas allt för spelet. Konstanter , variabler och klasser
+        definieras, block genereras och spelaren ritas ut.
+        </li>
+        <li>Funktioner med logik för spelaren, hit-detection och bollens rörelse
+        definieras.</li>
+        <li>Boll-funktionen körs rekursivt, där den i varje frame kollar ifall
+        bollen träffat något.</li>
+      </ul>
     </article>
     <footer>
       <p>Byggt av Thea Crona i kursen Webbutveckling 2.</p>

@@ -195,7 +195,6 @@ function main() {
     if (detectBlockBottomTop(blockLayer3)) {
       ballMoveY *= -1;
     }
-
     //Ritar ut den nya bollen.
     ctx.fillStyle = BALL_COLOR;
     ctx.fillRect(ballX, ballY, BALL_SIZE, BALL_SIZE);
