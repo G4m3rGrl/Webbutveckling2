@@ -66,7 +66,6 @@ function main() {
 
   //Ritar spelaren enligt angivna variabler & konstanter.
   function drawPlayer() {
-    ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
     ctx.fillStyle = PLAYER_COLOR;
     ctx.fillRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
   }
@@ -76,11 +75,13 @@ function main() {
   window.onkeypress = function (e) {
     //Om trycker på z
     if (e.keyCode == 122) {
+      ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
       playerX -= MOVEMENT_SPEED;
       drawPlayer();
     }
     //Om trycker på x
     else if (e.keyCode == 120) {
+      ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
       playerX += MOVEMENT_SPEED;
       drawPlayer();
     }
