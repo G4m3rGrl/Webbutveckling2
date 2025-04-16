@@ -132,13 +132,12 @@
       <h3>Spelaren</h3>
       <img src="../images/kod8.png"
            alt="function drawPlayer() {
-                  ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
                   ctx.fillStyle = PLAYER_COLOR;
                   ctx.fillRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
                 }
                 drawPlayer();">
       <p>Denna funktion används för att rita ut spelaren och är väldigt enkel.
-      Först suddas den förre bilden av rpelaren ut. Sedan sätts ritfärgen till
+      Först sätts ritfärgen till
       spelarens färg, sedan ritas spelaren ut på dess nuvarande koordinater med
       den storlek som anges i konstanterna. Sedan ritas spelaren ut direkt, så
       att den är utritad så fort spelet startats.</p>
@@ -146,25 +145,28 @@
            alt="window.onkeypress = function (e) {
                 //Om trycker på z
                 if (e.keyCode == 122) {
+                  ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
                   playerX -= MOVEMENT_SPEED;
                   drawPlayer();
                 }
                 //Om trycker på x
                 else if (e.keyCode == 120) {
+                  ctx.clearRect(playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
                   playerX += MOVEMENT_SPEED;
                   drawPlayer();
                 }
               }">
       <p>Här skapas en funktion som körs varje gång användaren trycker ner en
-      tangent. Först körs en if-sats som kollar ifall tangenten som tryckts
+      tangent. Sedan körs en if-sats som kollar ifall tangenten som tryckts
       ner har keyCode-värdet 122 (alltså om tangenten som tryckts ner är
-      'z'-tangenten). I så fall minskas spelarens x-värde med mängden av
+      'z'-tangenten). I så fall suddas spelaren ut. Sedan
+      minskas spelarens x-värde med mängden av
       konstanten MOVEMENT_SPEED. Sedan körs drawPlayer, vilket gör att spelaren
       flyttar till vänster. Sedan körs en else if-sats som kollar ifall
       'x'-tangenten tryckts ner, där koden är likadan, utom att spelaren flyttas
       till höger istället.</p>
       <h3>Ta sönder ett block</h3>
-      <img src="../images/kod10-png"
+      <img src="../images/kod10.png"
            alt="function breakBlock(block) {
                   ctx.clearRect(block.x - 1, block.y, block.width + 2, block.height);
                   block.x = -100;
@@ -213,6 +215,90 @@
       fallet förstörs blocket genom breakBlock() funktionen och returnar true.
       Detta för att vi senare kommer använda detta för att kolla ifall bollen
       ska studsa.</p>
+      <img src="../images/kod12.png"
+           alt="function detectBlockSide(blockLayer) {
+                  if ((ballY >= blockLayer[0].y &&
+                      ballY <= blockLayer[0].y + BLOCK_HEIGHT) ||
+                      (ballY + BALL_SIZE >= blockLayer[0].y &&
+                      ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
+                    for (i = 0; i < blockLayer.length; i++) {
+                      if ((ballX + BALL_SIZE >= blockLayer[i].x + ballMoveX &&
+                          ballX + BALL_SIZE <= blockLayer[i].x - ballMoveX) ||
+                          (ballX >= blockLayer[i].x + blockLayer[i].width + ballMoveX &&
+                          ballX <= blockLayer[i].x + blockLayer[i].width - ballMoveX)) {
+                        breakBlock(blockLayer[i]);
+                        return true;
+                      }
+                    }
+                  }
+                }">
+      <p>Här gör samma typ av hit-detection men för blockets sida. Här är det
+      först samma if-sats som kollar ifall bollen är i samma Y-höjd som
+      blocklagret. Om den är det körs en foor-loop som itererar alla
+      Block-instanser i arrayen som tagits in i parametern. Den kollar ifall
+      bollens högersida rör blockets högersida (med en liten marginal) ELLER om
+      bollens vänstersida rör blockets högersida. I så fall förstörs blocket med
+      breakBlock()-funktionen och returnerar true.</p>
+      <h3>Bollen</h3>
+      <img src="../images/kod13.png" alt="function ball() {">
+      <p>funktionen ball() är väldigt stor och använder sig av flera av de
+      funktioner vi redan gått igenom. Men först kommer jag att förklara hur
+      funktionen fungerar. <br><br>Funktionen körs rekursivt. Det betyder att
+      i slutet av funktionen så anropar den sig själv, vilket gör att den körs
+      i en loop.</p>
+      <img src="../images/kod14.png"
+           alt="setTimeout(function(){
+                  ball();
+                }, BALL_REFRESH_RATE);">
+      <p>Här anropar funktionen sig själv, med en liten delay angiven i
+      konstanten BALL_REFRESH_RATE. Varje exkevering av funktionen är en "frame"
+      för bollen.</p>
+      <img src="../images/kod15.png"
+           alt="//Raderar den gamla instansen av bollen.
+                ctx.clearRect(ballX, ballY, BALL_SIZE, BALL_SIZE);
+
+                //Uppdaterar bollens koordinater
+                ballX += ballMoveX;
+                ballY += ballMoveY;">
+      <p>I början av funktionen suddas den förra framen av bollen ut. Sedan
+      uppdateras bollens koordinater genom att lägga till dess move-variabler för
+      både x och y-koordinaterna.</p>
+      <img src="../images/kod16.png"
+           alt="if ((ballX + BALL_SIZE) >= playerX &&
+                    (ballX) <= (playerX + PLAYER_WIDTH) &&
+                    (ballY + BALL_SIZE) >= playerY &&
+                    (ballY + BALL_SIZE) <= (playerY + PLAYER_HEIGHT)) {
+                  //Kollar vilken sida av spelaren bollen räffar. Om det är vänstersidan går
+                  //bollen vänster, annars höger.
+                  if (ballX + BALL_SIZE/2 >= playerX &&
+                      ballX + BALL_SIZE/2 <= playerX + PLAYER_WIDTH/2) {
+                    ballMoveX = Math.abs(ballMoveX) * -1;
+                  }
+                  else {
+                    ballMoveX = Math.abs(ballMoveX);
+                  }
+                  ballMoveY = Math.abs(ballMoveY) * -1;
+                }">
+      <p>Här är en hit-detection för spelar-blocket. I den första if-satsen
+      kollas ifall bollens botten är mellan plattformes x-koordinater OCH ifall
+      den är mellan blockets y-koordinater. I så fall körs en if-sats som ser
+      om bollen är på blockets vänstersida. I så fall blir bollens
+      moveX-variabel negativ (bollen går till vänster). Annars, alltså ifall den
+      träffar högersidan, blir bollens moveX-variabel positiv(bollen går till
+      höger). Sist så blir bollens moveY-variabel negativ
+      (bollen studsar uppåt).</p>
+      <img src="../images/kod17.png"
+           alt="if (ballX + BALL_SIZE >= canvas.width || ballX <= 0) {
+                  ballMoveX *= -1;
+                }
+                if (ballY < 0) {
+                  ballMoveY *= -1;
+                }">
+      <p>Den har även hit-detection mot canvas-sidans höger, vänster och
+      ovansida. Den första if-satsen kollar ifall bollens x-koordinat är utanför
+      högersidan ELLER vänstersidan. I så fall inverteras moveX-variabeln.
+      Sedan kollas ifall bollens y-koordinat är mindre än 0, alltså för långt
+      uppåt. Då inverteras moveY-variabeln.</p>
     </article>
     <footer>
       <p>Byggt av Thea Crona i kursen Webbutveckling 2.</p>

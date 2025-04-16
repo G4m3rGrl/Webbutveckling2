@@ -88,7 +88,7 @@ function main() {
   }
 
   //Clearar det ritade blocket, samt sätter blockinstansens storleksegenskaper
-  //till -100 utom för. De har då ingen storlek och kan därför inte bli träffade.
+  //till -100 utom för. De har då ingen storlek och kan därför inte bli träffade
   //x-egenskapen sätts också till 0, så att detectBlockSide inte ska kunna
   //kollidera med blocket.
   function breakBlock(block) {
@@ -123,9 +123,15 @@ function main() {
   //2 MOVEMENT_SPEED för att undvika buggen att bollen rör sig igenom
   //hit-detectionen.
   function detectBlockSide(blockLayer) {
-    if ((ballY >= blockLayer[0].y && ballY <= blockLayer[0].y + BLOCK_HEIGHT) || (ballY + BALL_SIZE >= blockLayer[0].y && ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
+    if ((ballY >= blockLayer[0].y &&
+        ballY <= blockLayer[0].y + BLOCK_HEIGHT) ||
+        (ballY + BALL_SIZE >= blockLayer[0].y &&
+        ballY + BALL_SIZE <= blockLayer[0].y + BLOCK_HEIGHT)) {
       for (i = 0; i < blockLayer.length; i++) {
-        if ((ballX + BALL_SIZE >= blockLayer[i].x + ballMoveX && ballX + BALL_SIZE <= blockLayer[i].x - ballMoveX) || (ballX >= blockLayer[i].x + blockLayer[i].width + ballMoveX && ballX <= blockLayer[i].x + blockLayer[i].width - ballMoveX)) {
+        if ((ballX + BALL_SIZE >= blockLayer[i].x + ballMoveX &&
+            ballX + BALL_SIZE <= blockLayer[i].x - ballMoveX) ||
+            (ballX >= blockLayer[i].x + blockLayer[i].width + ballMoveX &&
+            ballX <= blockLayer[i].x + blockLayer[i].width - ballMoveX)) {
           breakBlock(blockLayer[i]);
           return true;
         }
@@ -145,9 +151,14 @@ function main() {
     ballY += ballMoveY;
 
     //Hit-detection mot spelaren som gör att bollen studsar ifall den kolliderar
-    if ((ballX + BALL_SIZE) >= playerX && (ballX + BALL_SIZE) <= (playerX + PLAYER_WIDTH) && (ballY + BALL_SIZE) >= playerY && (ballY + BALL_SIZE) <= (playerY + PLAYER_HEIGHT)) {
-      //Kollar vilken sida av spelaren bollen räffar. Om det är vänstersidan går bollen vänster, annars höger.
-      if (ballX + BALL_SIZE/2 >= playerX && ballX + BALL_SIZE/2 <= playerX + PLAYER_WIDTH/2) {
+    if ((ballX + BALL_SIZE) >= playerX &&
+        (ballX) <= (playerX + PLAYER_WIDTH) &&
+        (ballY + BALL_SIZE) >= playerY &&
+        (ballY + BALL_SIZE) <= (playerY + PLAYER_HEIGHT)) {
+      //Kollar vilken sida av spelaren bollen räffar. Om det är vänstersidan går
+      //bollen vänster, annars höger.
+      if (ballX + BALL_SIZE/2 >= playerX &&
+          ballX + BALL_SIZE/2 <= playerX + PLAYER_WIDTH/2) {
         ballMoveX = Math.abs(ballMoveX) * -1;
       }
       else {
