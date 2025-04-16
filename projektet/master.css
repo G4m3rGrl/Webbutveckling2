@@ -35,18 +35,11 @@ article {
 }
 a, h1, h2, h3, p, ul, li {
   font-family: "Open Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
   font-style: normal;
   font-variation-settings:
     "wdth" 100;
 }
-h2 {
-  font-size: 15;
-}
-h3 {
-  font-size: 15;
-}
+
 #breakout {
   border: 5px solid #000;
   margin: auto;
